@@ -3,7 +3,7 @@
 #include "GameOfLife.h"
 
 
-__int64 Cycles()
+__int64 CPUCycles()
 {
     LARGE_INTEGER Cycles;
     QueryPerformanceCounter(&Cycles);
@@ -21,8 +21,8 @@ bool URenderData::CreateD3DDevice(HWND hwnd)
 {
     LARGE_INTEGER Frequency;
     QueryPerformanceFrequency(&Frequency);
-    __int64 CyclesPerSecond = Frequency.QuadPart;
-    double MillisecondsPerCycle = 1000.0 / (double)Frequency.QuadPart;
+    CyclesPerSecond = Frequency.QuadPart;
+    MillisecondsPerCycle = 1000.0 / (double)Frequency.QuadPart;
     CurrentSpeed = CyclesPerSecond >> 1;
 
     if (!CreateDeviceD3D(hwnd))
@@ -201,7 +201,7 @@ void URenderData::RenderHud(GameOfLife& TheSimulation)
                 }
                 if (ImGui::Button("Start"))
                 {
-                    StartStatsSeconds = Cycles();
+                    StartStatsSeconds = CPUCycles();
                     IndexTime = 0;
                     AverageTimeInMilliseconds = 0;
                     GoLState = EGoLStatus::Playing;
@@ -292,16 +292,16 @@ void URenderData::RenderHud(GameOfLife& TheSimulation)
 
 void URenderData::Update(GameOfLife& TheSimulation)
 {
-    __int64 CurrentTime = Cycles();
+    __int64 CurrentTime = CPUCycles();
     if ((CurrentTime - StartSpeedSeconds) > CurrentSpeed && GoLState == EGoLStatus::Playing)
     {
         StartSpeedSeconds = CurrentTime;
 
-        __int64 Start = Cycles();
+        __int64 Start = CPUCycles();
 
         TheSimulation.NextStep();
 
-        __int64 End = Cycles();
+        __int64 End = CPUCycles();
         TimeInMilliseconds[IndexTime] = (End - Start) * MillisecondsPerCycle;
         IndexTime++;
         if (IndexTime >= TimeSize || (End - StartStatsSeconds) > CyclesPerSecond)
@@ -315,8 +315,5 @@ void URenderData::Update(GameOfLife& TheSimulation)
             StartStatsSeconds = End;
             IndexTime = 0;
         }
-
-        constexpr int TimeSize = 100;
-        double TimeInMilliseconds[TimeSize]{ 0. };
     }
 }
