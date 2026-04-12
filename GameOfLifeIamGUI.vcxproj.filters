@@ -45,6 +45,9 @@
     <ClCompile Include="GameOfLife.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RenderData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -63,6 +66,9 @@
       <Filter>iamgui</Filter>
     </ClInclude>
     <ClInclude Include="GameOfLife.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
