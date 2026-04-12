@@ -22,8 +22,8 @@ bool URenderData::CreateD3DDevice(HWND hwnd)
 {
     LARGE_INTEGER Frequency;
     QueryPerformanceFrequency(&Frequency);
-    __int64 CyclesPerSecond = Frequency.QuadPart;
-    double MillisecondsPerCycle = 1000.0 / (double)Frequency.QuadPart;
+    CyclesPerSecond = Frequency.QuadPart;
+    MillisecondsPerCycle = 1000.0 / (double)Frequency.QuadPart;
     CurrentSpeed = CyclesPerSecond >> 1;
 
     if (!CreateDeviceD3D(hwnd))
@@ -323,8 +323,5 @@ void URenderData::Update(GameOfLife& TheSimulation)
             StartStatsSeconds = End;
             IndexTime = 0;
         }
-
-        constexpr int TimeSize = 100;
-        double TimeInMilliseconds[TimeSize]{ 0. };
     }
 }
