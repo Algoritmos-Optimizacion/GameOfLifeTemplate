@@ -1,9 +1,10 @@
 
 #include "RenderData.h"
 #include "GameOfLife.h"
+#include "optick.h"
 
 
-__int64 Cycles()
+static __int64 Cycles()
 {
     LARGE_INTEGER Cycles;
     QueryPerformanceCounter(&Cycles);
@@ -147,6 +148,7 @@ LRESULT WINAPI URenderData::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 
 void URenderData::Present()
 {
+    OPTICK_EVENT();
     const ImVec4 clear_color = ImVec4(0.0f, 0.f, 0.0f, 1.00f);
 
     const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
@@ -162,6 +164,7 @@ void URenderData::Present()
 
 void URenderData::RenderHud(GameOfLife& TheSimulation)
 {
+    OPTICK_EVENT();
     // Handle window resize (we don't resize directly in the WM_SIZE handler)
     if (ResizeWidth != 0 && ResizeHeight != 0)
     {
@@ -292,6 +295,7 @@ void URenderData::RenderHud(GameOfLife& TheSimulation)
 
 void URenderData::Update(GameOfLife& TheSimulation)
 {
+    OPTICK_EVENT();
     __int64 CurrentTime = Cycles();
     if ((CurrentTime - StartSpeedSeconds) > CurrentSpeed && GoLState == EGoLStatus::Playing)
     {
@@ -299,7 +303,11 @@ void URenderData::Update(GameOfLife& TheSimulation)
 
         __int64 Start = Cycles();
 
-        TheSimulation.NextStep();
+        {
+            OPTICK_EVENT("Simulation");
+
+            TheSimulation.NextStep();
+        }
 
         __int64 End = Cycles();
         TimeInMilliseconds[IndexTime] = (End - Start) * MillisecondsPerCycle;

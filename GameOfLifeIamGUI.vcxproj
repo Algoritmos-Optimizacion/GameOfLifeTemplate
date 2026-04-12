@@ -119,13 +119,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>imgui\backends;imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>imgui\backends;imgui;optick;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)/Lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)/Lib/x64;optick\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;dxgi.lib;optickCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -147,6 +147,7 @@
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="optick\optick.h" />
     <ClInclude Include="RenderData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -45,10 +45,10 @@ protected:
     };
     EGoLStatus GoLState = Stopped;
 
-    static constexpr int MaxGridWidth = 2000;
-    static  constexpr int MaxGridHeight = 1000;
-    int GridWidth = 200;
-    int GridHeight = 100;
+    static constexpr int MaxGridWidth = 4000;
+    static  constexpr int MaxGridHeight = 2000;
+    int GridWidth = 2000;
+    int GridHeight = 1000;
     const ImU32 Black = ImGui::ColorConvertFloat4ToU32(ImVec4(0.1f, 0.1f, 0.1f, 0.9f));
     const ImU32 White = ImGui::ColorConvertFloat4ToU32(ImVec4(1.f, 1.f, 1.f, 0.9f));
     ImVec2 WindowPos = {10.f, 20.f};

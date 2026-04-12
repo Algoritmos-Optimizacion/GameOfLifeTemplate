@@ -16,6 +16,9 @@
     <Filter Include="iamgui">
       <UniqueIdentifier>{5c41a241-86c2-4210-bcb6-ee6bba6bf4e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Optick">
+      <UniqueIdentifier>{6243a4c3-9aa6-4735-aac4-344439e6cfb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="RenderData.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="optick\optick.h">
+      <Filter>Header Files\Optick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

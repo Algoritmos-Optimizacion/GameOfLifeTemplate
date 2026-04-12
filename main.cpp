@@ -14,7 +14,7 @@
 #include "RenderData.h"
 #include <d3d11.h>
 #include <tchar.h>
-
+#include "optick.h"
 #include "GameOfLife.h"
 
 
@@ -86,6 +86,8 @@ int main(int, char**)
     bool done = false;
     while (!done)
     {
+        OPTICK_FRAME("MainThread");
+
         // Poll and handle messages (inputs, window resize, etc.)
         // See the WndProc() function below for our to dispatch events to the Win32 backend.
         MSG msg;
@@ -108,6 +110,9 @@ int main(int, char**)
             continue;
         }
 
+        // Update simulation
+        RenderData.Update(TheSimulation);
+
         // Start the Dear ImGui frame
         RenderData.RenderHud(TheSimulation);
 
@@ -115,8 +120,6 @@ int main(int, char**)
         ImGui::Render();
 
         RenderData.Present();
-
-        RenderData.Update(TheSimulation);
     }
 
     // Cleanup
